@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ViewControllerStack
 
 final class HomeViewController: UIViewController {
     
@@ -43,11 +44,11 @@ final class HomeViewController: UIViewController {
         let thirdVC = ThirdViewController.instance()
         let fourthVC = FourthViewController.instance()
         
-        let controllers: [StackFrameSubViewController] = [firstVC,
-                                                          secondVC,
-                                                          thirdVC,
-                                                          fourthVC].compactMap({ $0 })
-        stackFrameViewController = StackFrameViewController(viewControllers: controllers)
+        let controllers = [firstVC,
+                           secondVC,
+                           thirdVC,
+                           fourthVC].compactMap({ $0 as? StackFrameSubViewController })
+        stackFrameViewController = StackViewFrameBuilder.configure(controllers: controllers)
         
         guard let stackFrameVC = stackFrameViewController else {
             return

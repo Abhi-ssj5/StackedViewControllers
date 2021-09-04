@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class StackFrameViewController: UIViewController, StackFrameView {
+final class StackFrameViewController: UIViewController, StackFrameView {
     
     // MARK: - Private members
     
@@ -19,8 +19,8 @@ public final class StackFrameViewController: UIViewController, StackFrameView {
     
     // MARK: - Public member
     
-    public var collapseViewHeight: CGFloat = Defaults.topConstraintConstant
-    public private(set) var viewControllers: [StackFrameSubViewController]
+    var collapseViewHeight: CGFloat = Defaults.topConstraintConstant
+    private(set) var viewControllers: [StackFrameSubViewController]
     
     // MAR: - Initializer
     
@@ -42,7 +42,7 @@ public final class StackFrameViewController: UIViewController, StackFrameView {
     
     // MARK: - LifeCycle methods
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         configureDelegates()
@@ -77,8 +77,8 @@ extension StackFrameViewController: StackFrameSubViewControllerDelegate {
     /// - Parameters:
     ///   - controller: StackFrameSubViewController
     ///   - button: UIButton
-    public func stackFrameSubViewController(_ controller: StackFrameSubViewController,
-                                            collapseButtonTapped button: UIButton) {
+    func stackFrameSubViewController(_ controller: StackFrameSubViewController,
+                                     collapseButtonTapped button: UIButton) {
         
         controller.updateState(.expanded)
         
@@ -109,8 +109,8 @@ extension StackFrameViewController: StackFrameSubViewControllerDelegate {
     /// - Parameters:
     ///   - controller: StackFrameSubViewController
     ///   - button: UIButton
-    public func stackFrameSubViewController(_ controller: StackFrameSubViewController,
-                                            nextButtonTapped button: UIButton) {
+    func stackFrameSubViewController(_ controller: StackFrameSubViewController,
+                                     nextButtonTapped button: UIButton) {
         let index = controller.view.tag + 1
         guard index >= 0,
               index < viewControllers.count else {
@@ -129,7 +129,7 @@ extension StackFrameViewController: StackFrameSubViewControllerDelegate {
                                               height: viewHeight))
         view.bringSubviewToFront(nextViewController.view)
         
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 0.2,
                        delay: 0.0,
                        options: .curveEaseInOut,
                        animations: {
